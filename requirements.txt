@@ -1,11 +1,13 @@
 asgiref==3.5.1
-certifi==2022.5.18.1      
+certifi==2022.5.18.1
 charset-normalizer==2.0.12
 colorama==0.4.5
 commonmark==0.9.1
 defusedxml==0.7.1
 distlib==0.3.4
 Django==4.0
+django-background-tasks==1.2.5
+django-compat==1.0.15
 django-cors-headers==3.12.0
 django-crispy-forms==1.7.2
 django-extensions==3.1.5
