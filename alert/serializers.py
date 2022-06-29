@@ -11,7 +11,6 @@ class AlertSerializer(serializers.ModelSerializer):
         model=Alert
         fields=['id','alert_value','status','user','coin']
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User

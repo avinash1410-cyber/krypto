@@ -24,7 +24,55 @@ from rest_framework_simplejwt.views import (
 from alert.views import trigerred
 
 
+# from __future__ import unicode_literals
+# from django.shortcuts import render,HttpResponse
+# from background_task import background
+# # Create your views here.
+# @background(schedule=5)
+# def hello():
+# 	print ("Hello World!")
 
+# def background_view(request):
+#     hello(repeat=10)
+#     return HttpResponse("Hello world !")
+
+
+import datetime,time
+
+import threading
+
+
+class TestThreading(object):
+    def __init__(self, interval=1):
+        self.interval = interval
+
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True
+        thread.start()
+
+    def run(self):
+        while True:
+            # More statements comes here
+            # print(datetime.datetime.now().__str__() + ' : Start task in the background')
+            trigerred()
+            time.sleep(self.interval)
+
+tr = TestThreading()
+time.sleep(1)
+print(datetime.datetime.now().__str__() + ' : First output')
+time.sleep(2)
+print(datetime.datetime.now().__str__() + ' : Second output')
+
+
+
+
+
+
+# from alert.views import trigerred
+# def looper(request):
+#     if request.method=="GET":
+#         while True:
+#             trigerred("GET")
 
 
 urlpatterns = [
@@ -32,4 +80,5 @@ urlpatterns = [
     path('alert/', include('alert.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # path('',looper),
     ]
