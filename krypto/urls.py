@@ -13,34 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from http import server
+from turtle import home
 from django.contrib import admin
+from django.http import HttpResponse
 from django.urls import path,include
+from requests import Response
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-
 from alert.views import trigerred
-
-
-# from __future__ import unicode_literals
-# from django.shortcuts import render,HttpResponse
-# from background_task import background
-# # Create your views here.
-# @background(schedule=5)
-# def hello():
-# 	print ("Hello World!")
-
-# def background_view(request):
-#     hello(repeat=10)
-#     return HttpResponse("Hello world !")
-
-
 import datetime,time
-
 import threading
-
 
 class TestThreading(object):
     def __init__(self, interval=1):
@@ -64,18 +50,31 @@ time.sleep(2)
 print(datetime.datetime.now().__str__() + ' : Second output')
 
 
+import json 
+
+
+def Home(request):
+    dict={
+    "alert/create/":"CreateAlert",
+    "alert/delete/":"DeleteAlert",
+    "alert/": "Alertofuser",
+    "alert/<int:pk>/":"ParticularAlertAPIView",
+    "alert/logout/":"LogoutView",
+    "alert/register/":"Register",
+    "alert/api/token/":"TokenObtainPairView",
+    "alert/api/token/refresh/": "TokenRefreshView",
+    "alert/api/token/verify/": "TokenVerifyView",
+    "alert/filter/": "search(by post)"
+    }
+    json_object = json.dumps(dict, indent = 4) 
+    return HttpResponse(json_object)
 
 
 
-
-# from alert.views import trigerred
-# def looper(request):
-#     if request.method=="GET":
-#         while True:
-#             trigerred("GET")
 
 
 urlpatterns = [
+    path('',Home),
     path('admin/', admin.site.urls),
     path('alert/', include('alert.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
